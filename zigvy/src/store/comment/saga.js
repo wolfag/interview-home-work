@@ -1,0 +1,100 @@
+import { all, call, put, take } from "redux-saga/effects";
+import { notification } from "antd";
+
+import * as CommentType from "./type";
+import * as CommentAction from "./action";
+import { commentService } from "services";
+
+function* addComment() {
+  while (1) {
+    const action = yield take(CommentType.ADD_COMMENT);
+    try {
+      const response = yield call(commentService.createComment, action.payload);
+
+      yield put(CommentAction.addCommentSuccessAction(response));
+      notification.success({
+        message: "Add comment successfully"
+      });
+    } catch (error) {
+      yield put(CommentAction.addCommentFailAction(error));
+      notification.error({
+        message: "Add comment fail",
+        description: error.message
+      });
+    }
+  }
+}
+
+function* updateComment() {
+  while (1) {
+    const action = yield take(CommentType.UPDATE_COMMENT);
+    try {
+      const response = yield call(commentService.updateComment, action.payload);
+
+      yield put(CommentAction.updateCommentSuccessAction(response));
+      notification.success({
+        message: "Update comment successfully"
+      });
+    } catch (error) {
+      yield put(CommentAction.updateCommentFailAction(error));
+      notification.error({
+        message: "Update comment fail",
+        description: error.message
+      });
+    }
+  }
+}
+
+function* deleteComment() {
+  while (1) {
+    const action = yield take(CommentType.DELETE_COMMENT);
+    try {
+      const response = yield call(commentService.deleteComment, action.payload);
+
+      yield put(CommentAction.deleteCommentSuccessAction(response));
+      notification.success({
+        message: "Delete comment successfully"
+      });
+    } catch (error) {
+      yield put(CommentAction.deleteCommentFailAction(error));
+      notification.error({
+        message: "Delete comment fail",
+        description: error.message
+      });
+    }
+  }
+}
+
+function* getListCommentByPost() {
+  while (1) {
+    const action = yield take(CommentType.GET_LIST_COMMENT_BY_POST);
+    const { payload } = action;
+    try {
+      const response = yield call(commentService.getListCommentByPost, payload);
+
+      yield put(
+        CommentAction.getListCommentByPostSuccessAction({
+          origin: payload,
+          data: response
+        })
+      );
+    } catch (error) {
+      yield put(
+        CommentAction.getListCommentByPostFailAction({ origin: payload, error })
+      );
+      notification.error({
+        message: "Can not load comments",
+        description: error.message
+      });
+    }
+  }
+}
+
+export default function* rootSaga() {
+  yield all([
+    addComment(),
+    updateComment(),
+    deleteComment(),
+    getListCommentByPost()
+  ]);
+}

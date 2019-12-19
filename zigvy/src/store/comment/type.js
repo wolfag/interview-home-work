@@ -1,0 +1,17 @@
+export const ADD_COMMENT = "comment/ADD_COMMENT";
+export const ADD_COMMENT_SUCCESS = "comment/ADD_COMMENT_SUCCESS";
+export const ADD_COMMENT_FAIL = "comment/ADD_COMMENT_FAIL";
+
+export const UPDATE_COMMENT = "comment/UPDATE_COMMENT";
+export const UPDATE_COMMENT_SUCCESS = "comment/UPDATE_COMMENT_SUCCESS";
+export const UPDATE_COMMENT_FAIL = "comment/UPDATE_COMMENT_FAIL";
+
+export const DELETE_COMMENT = "comment/DELETE_COMMENT";
+export const DELETE_COMMENT_SUCCESS = "comment/DELETE_COMMENT_SUCCESS";
+export const DELETE_COMMENT_FAIL = "comment/DELETE_COMMENT_FAIL";
+
+export const GET_LIST_COMMENT_BY_POST = "comment/GET_LIST_COMMENT_BY_POST";
+export const GET_LIST_COMMENT_BY_POST_SUCCESS =
+  "comment/GET_LIST_COMMENT_BY_POST_SUCCESS";
+export const GET_LIST_COMMENT_BY_POST_FAIL =
+  "comment/GET_LIST_COMMENT_BY_POST_FAIL";
