@@ -33,10 +33,10 @@ function Header(props) {
           }
         >
           {!isEmpty(menus) &&
-            menus.map(menu => {
+            menus.map((menu, index) => {
               const { title, icon, action } = menu;
               return (
-                <Menu.Item onClick={action}>
+                <Menu.Item key={index} onClick={action}>
                   <span>
                     {icon && <Icon type={icon}></Icon>}
                     <span>{title}</span>
