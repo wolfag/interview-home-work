@@ -8,6 +8,7 @@ const { Header, Footer, Content } = Layout;
 
 function Blog() {
   const [visiblePostModal, setVisiblePostModal] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const _onProfile = () => {
     alert("onProfile");
@@ -26,11 +27,22 @@ function Blog() {
     setVisiblePostModal(false);
   };
 
+  const _onSearchPost = values => {
+    alert(values);
+  };
+
+  const _onSearchChange = event => {
+    setSearchValue(event.target.value);
+  };
+
   return (
     <>
       <Layout>
         <Header>
           <MyHeader
+            searchValue={searchValue}
+            onSearch={_onSearchPost}
+            onSearchChange={_onSearchChange}
             menus={[
               {
                 title: "Profile",
