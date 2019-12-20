@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { Layout } from "antd";
+import {useDispatch, useSelector} from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { PostList, PostFormModal } from "components/Post";
 import MyHeader from "components/Header";
 
+import * as PostAction from 'store/post/action';
+
+
 const { Header, Footer, Content } = Layout;
 
-function Blog() {
+function Blog(props) {
+  const {userId} = props;
   const [visiblePostModal, setVisiblePostModal] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const dispatch = useDispatch ();
 
   const _onProfile = () => {
     alert("onProfile");
@@ -23,7 +30,7 @@ function Blog() {
   };
 
   const _onSubmitNewPost = async values => {
-    console.log(values);
+    dispatch(PostAction.addPostAction({data:{...values, owner: userId}}))
     setVisiblePostModal(false);
   };
 
@@ -58,7 +65,7 @@ function Blog() {
           />
         </Header>
         <Content>
-          <PostList />
+          <PostList authorId={userId} />
         </Content>
         <Footer>This is footer</Footer>
       </Layout>
@@ -69,6 +76,14 @@ function Blog() {
       />
     </>
   );
+}
+
+Blog.propTypes={
+  userId: PropTypes.number.isRequired
+}
+
+Blog.defaultProps={
+  userId: 1
 }
 
 export default Blog;

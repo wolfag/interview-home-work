@@ -3,24 +3,19 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import {Typography, Tag, Card, Icon, Modal} from 'antd';
 import {isEmpty} from 'lodash';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Constant from 'common/constant';
 import {CommentList} from 'components/Comment';
+import * as PostAction from 'store/post/action';
 
 const {Title, Paragraph} = Typography;
 const {confirm} = Modal;
 
 function Post (props) {
-  const {
-    id,
-    title,
-    author,
-    createdAt,
-    tags,
-    content,
-    onDeletePost,
-    onEditPost,
-  } = props;
+  const {id, title, author, createdAt, tags, content, onEditPost} = props;
+
+  const dispatch = useDispatch ();
 
   const _showDeleteConfirm = () => {
     confirm ({
@@ -29,12 +24,16 @@ function Post (props) {
       okType: 'danger',
       cancelText: 'No',
       onOk () {
-        onDeletePost (id);
+        _onDeletePost (id);
       },
       onCancel () {
         console.log ('Cancel');
       },
     });
+  };
+
+  const _onDeletePost = postId => {
+    dispatch (PostAction.deletePostAction ({postId}));
   };
 
   return (
@@ -102,7 +101,6 @@ Post.propTypes = {
   createdAt: PropTypes.number.isRequired,
   tags: PropTypes.array,
   content: PropTypes.string.isRequired,
-  onDeletePost: PropTypes.func,
   onEditPost: PropTypes.func,
 };
 Post.defaultProps = {
@@ -117,9 +115,6 @@ Post.defaultProps = {
   design language for background applications, is refined by Ant UED Team. Ant Design, a design
   language for background applications, is refined by Ant UED Team. Ant Design, a design
   language for background applications, is refined by Ant UED Team.`,
-  onDeletePost: () => {
-    alert ('onDeletePost');
-  },
   onEditPost: () => {
     alert ('onEditPost');
   },

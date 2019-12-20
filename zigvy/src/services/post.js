@@ -7,7 +7,7 @@ const commentData = require ('data/comments.json');
 
 export default {
   getPost: async options => {
-    const result = await axios.get (`${baseUrl}/posts/${options.PostId}`);
+    const result = await axios.get (`${baseUrl}/posts/${options.postId}`);
 
     return result.data;
   },
@@ -31,18 +31,22 @@ export default {
     return {data, total: data.length, limit: options.paging.limit, offset: 0};
   },
   createPost: async options => {
-    const result = await axios.post (`${baseUrl}/posts`, options.data);
-    return result.data;
+    // const result = await axios.post (`${baseUrl}/posts`, options.data);
+    // return result.data;
+
+    return true;
   },
   updatePost: async options => {
     const result = await axios.put (
-      `${baseUrl}/posts/${options.PostId}`,
+      `${baseUrl}/posts/${options.postId}`,
       options.data
     );
     return result.data;
   },
   deletePost: async options => {
-    const result = await axios.delete (`${baseUrl}/posts/${options.PostId}`);
-    return result.data;
+    // const result = await axios.delete (`${baseUrl}/posts/${options.postId}`);
+    // return result.data;
+
+    return true;
   },
 };

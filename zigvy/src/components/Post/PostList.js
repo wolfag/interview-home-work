@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import update from 'immutability-helper';
 
 import Post from './Post';
-import * as PostAction from 'store/post/actions';
+import * as PostAction from 'store/post/action';
 import * as PostSelector from 'store/post/selector';
 
 function PostList (props) {

@@ -2,7 +2,7 @@ import {all, call, put, take} from 'redux-saga/effects';
 import {notification} from 'antd';
 
 import * as PostType from './type';
-import * as PostAction from './actions';
+import * as PostAction from './action';
 import {postService} from 'services';
 
 function* addPost () {
@@ -12,6 +12,12 @@ function* addPost () {
       const response = yield call (postService.createPost, action.payload);
 
       yield put (PostAction.addPostSuccessAction (response));
+      yield put (
+        PostAction.fakeAddPostAction ({
+          ...action.payload.data,
+          id: Math.random (),
+        })
+      );
     } catch (error) {
       yield put (PostAction.addPostFailAction (error));
       notification.error ({
@@ -45,6 +51,7 @@ function* deletePost () {
       const response = yield call (postService.deletePost, action.payload);
 
       yield put (PostAction.deletePostSuccessAction (response));
+      yield put (PostAction.fakeDeletePostAction (action.payload.postId));
     } catch (error) {
       yield put (PostAction.deletePostFailAction (error));
       notification.error ({
