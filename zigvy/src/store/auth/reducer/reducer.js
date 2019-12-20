@@ -1,6 +1,9 @@
 import update from "immutability-helper";
 import { handleActions } from "redux-actions";
+import { get } from "lodash";
 
+import { setToken, removeToken } from "services/axios";
+import { setAuth } from "services/localStorage";
 import * as Type from "../type";
 import { initialState } from "./initialize";
 
@@ -25,6 +28,9 @@ const reducer = handleActions(
     [
       Type.LOGIN_SUCCESS,
       (state, action) => {
+        const token = get(action.payload, "token"); //for real server
+        setToken(token);
+        setAuth(action.payload);
         return update(state, {
           loading: { $set: true },
           authInfo: { $set: action.payload }
@@ -34,16 +40,11 @@ const reducer = handleActions(
     [
       Type.LOGOUT,
       state => {
+        setAuth(null);
+        removeToken();
         return update(state, {
-          loading: true
-        });
-      }
-    ],
-    [
-      Type.LOGOUT_SUCCESS,
-      state => {
-        return update(state, {
-          loading: { $set: false }
+          loading: { $set: true },
+          authInfo: { $set: null }
         });
       }
     ]

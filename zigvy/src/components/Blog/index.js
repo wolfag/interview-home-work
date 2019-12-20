@@ -10,6 +10,7 @@ import { history } from "store";
 
 import * as PostAction from "store/post/action";
 import * as AuthSelector from "store/auth/selector";
+import * as AuthAction from "store/auth/action";
 
 const { Header, Footer, Content } = Layout;
 
@@ -59,7 +60,10 @@ function Blog(props) {
     setSearchValue(values);
   };
 
-  const _onLogout = () => {};
+  const _onLogout = () => {
+    dispatch(AuthAction.logoutAction());
+    history.push("/");
+  };
 
   return (
     <>
