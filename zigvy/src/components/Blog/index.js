@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Layout } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import { get } from "lodash";
 
 import { PostList, PostFormModal } from "components/Post";
 import MyHeader from "components/Header";
 import { history } from "store";
 
 import * as PostAction from "store/post/action";
+import * as AuthSelector from "store/auth/selector";
 
 const { Header, Footer, Content } = Layout;
 
 function Blog(props) {
-  const { userId } = props;
+  const userAuth = useSelector(AuthSelector.getAuthInfo);
   const [visiblePostModal, setVisiblePostModal] = useState(false);
   const [initialPostData, setInitialPostData] = useState(null);
   const [isEditPost, setIsEditPost] = useState(false);
@@ -40,7 +42,11 @@ function Blog(props) {
   };
 
   const _onSubmitNewPost = async values => {
-    dispatch(PostAction.addPostAction({ data: { ...values, owner: userId } }));
+    dispatch(
+      PostAction.addPostAction({
+        data: { ...values, owner: get(userAuth, "id") }
+      })
+    );
     setVisiblePostModal(false);
   };
 
@@ -96,12 +102,8 @@ function Blog(props) {
   );
 }
 
-Blog.propTypes = {
-  userId: PropTypes.number.isRequired
-};
+Blog.propTypes = {};
 
-Blog.defaultProps = {
-  userId: 3
-};
+Blog.defaultProps = {};
 
 export default Blog;

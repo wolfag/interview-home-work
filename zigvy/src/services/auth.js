@@ -18,7 +18,7 @@ export default {
     if (user) {
       return user;
     } else {
-      return Error("Wrong username or password!!!");
+      throw Error("Wrong username or password!!!");
     }
   }
 };

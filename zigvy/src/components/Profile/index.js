@@ -1,13 +1,16 @@
 import React from "react";
 import { Card, Avatar, Icon } from "antd";
 import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
 
 import Constant from "common/constant";
+import * as AuthSelector from "store/auth/selector";
 
 const { Meta } = Card;
 
 function Profile(props) {
-  const { profile } = props;
+  const profile = useSelector(AuthSelector.getAuthInfo);
+
   return (
     <div
       style={{
@@ -38,15 +41,6 @@ function Profile(props) {
   );
 }
 
-Profile.defaultProps = {
-  profile: {
-    id: 1,
-    username: "meowmeow",
-    password: "1234567890",
-    name: "Cat face",
-    dob: "01/06/2016",
-    created_at: 1576506719083
-  }
-};
+Profile.defaultProps = {};
 
 export default Profile;

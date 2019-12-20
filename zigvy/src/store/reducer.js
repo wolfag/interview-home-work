@@ -21,7 +21,7 @@ export default history => {
     key: "root",
     storage: storageSession,
     stateReconciler: autoMergeLevel2,
-    blacklist: "router,post"
+    blacklist: "router"
   };
 
   return persistReducer(persistConfig, reducers);
