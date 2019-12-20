@@ -24,11 +24,14 @@ function Header(props) {
       }}
     >
       <Avatar size={64} src={logo} alt="logo" />
-      <Title level={2}>Blogs</Title>
+      <Title level={2} style={{ color: "white", alignSelf: "center" }}>
+        Blogs
+      </Title>
+      <div></div>
       <Search
         placeholder="Title, Tags..."
         onSearch={onSearch}
-        style={{ width: 200 }}
+        style={{ width: 200, height: "100%", alignSelf: "center" }}
         value={searchValue}
         onChange={onSearchChange}
         allowClear

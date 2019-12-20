@@ -38,7 +38,7 @@ function Blog() {
   return (
     <>
       <Layout>
-        <Header>
+        <Header style={{ background: "grey" }}>
           <MyHeader
             searchValue={searchValue}
             onSearch={_onSearchPost}
