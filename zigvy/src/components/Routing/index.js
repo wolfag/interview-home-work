@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 
+import Login from "components/Auth";
 import Blogs from "components/Blog";
 import Profile from "components/Profile";
 
@@ -15,7 +16,7 @@ const routes = [
   },
   {
     path: "/",
-    component: Blogs
+    component: Login
   }
 ];
 

@@ -1,0 +1,14 @@
+.login {
+  max-width: 300px;
+  margin: 80px auto 0;
+  background: grey;
+  padding: 20px 15px 30px;
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+.login h3 {
+  text-align: center;
+}
+.login div input {
+  margin: 10px 0;
+}

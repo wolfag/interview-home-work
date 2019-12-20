@@ -1,4 +1,5 @@
-import postService from './post';
-import commentService from './comment';
+import postService from "./post";
+import commentService from "./comment";
+import authService from "./auth";
 
-export {postService, commentService};
+export { postService, commentService, authService };

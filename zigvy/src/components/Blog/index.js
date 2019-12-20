@@ -53,6 +53,8 @@ function Blog(props) {
     setSearchValue(values);
   };
 
+  const _onLogout = () => {};
+
   return (
     <>
       <Layout>
@@ -69,6 +71,11 @@ function Blog(props) {
                 title: "New Post",
                 action: _onNewPost,
                 icon: "plus"
+              },
+              {
+                title: "Logout",
+                icon: "logout",
+                action: _onLogout
               }
             ]}
           />
