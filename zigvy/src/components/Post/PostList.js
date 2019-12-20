@@ -15,7 +15,7 @@ function PostList (props) {
   });
 
   const dispatch = useDispatch ();
-  const {searchValues, authorId} = props;
+  const {searchValues, authorId, onEditPost} = props;
 
   useEffect (
     () => {
@@ -49,6 +49,10 @@ function PostList (props) {
     setLoadOptions (tmp);
   };
 
+  const _onEditPost = post => () => {
+    onEditPost (post);
+  };
+
   return (
     <List
       loading={loading}
@@ -60,7 +64,7 @@ function PostList (props) {
       renderItem={post => {
         return (
           <List.Item key={post.id}>
-            <Post {...post} />
+            <Post {...post} onEditPost={_onEditPost (post)} />
           </List.Item>
         );
       }}

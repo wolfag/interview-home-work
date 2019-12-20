@@ -144,6 +144,7 @@ const reducer = handleActions (
         return update (state, {
           listPost: {
             list: {$push: [action.payload]},
+            total: {$set: state.listPost.total + 1},
           },
         });
       },
@@ -157,8 +158,32 @@ const reducer = handleActions (
         return update (state, {
           listPost: {
             list: {$set: data},
+            total: {$set: state.listPost.total - 1},
           },
         });
+      },
+    ],
+    [
+      Type.FAKE_UPDATE_POST,
+      (state, action) => {
+        const list = state.listPost.list;
+        const item = action.payload;
+        let index = null;
+        for (let i = 0; i < list.length; i++) {
+          if (list[i].id === item.id) {
+            index = i;
+            break;
+          }
+        }
+        if (index !== null) {
+          return update (state, {
+            listPost: {
+              list: {[index]: {$set: item}},
+            },
+          });
+        } else {
+          return state;
+        }
       },
     ],
   ]),

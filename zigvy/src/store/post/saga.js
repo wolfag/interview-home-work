@@ -35,6 +35,7 @@ function* updatePost () {
       const response = yield call (postService.updatePost, action.payload);
 
       yield put (PostAction.updatePostAction (response));
+      yield put (PostAction.fakeUpdatePostAction (action.payload.data));
     } catch (error) {
       yield put (PostAction.updatePostFailAction (error));
       notification.error ({

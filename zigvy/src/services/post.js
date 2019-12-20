@@ -37,11 +37,13 @@ export default {
     return true;
   },
   updatePost: async options => {
-    const result = await axios.put (
-      `${baseUrl}/posts/${options.postId}`,
-      options.data
-    );
-    return result.data;
+    // const result = await axios.put (
+    //   `${baseUrl}/posts/${options.postId}`,
+    //   options.data
+    // );
+    // return result.data;
+
+    return true;
   },
   deletePost: async options => {
     // const result = await axios.delete (`${baseUrl}/posts/${options.postId}`);

@@ -1,12 +1,13 @@
-import React from "react";
-import { Modal, Typography } from "antd";
+import React from 'react';
+import {Modal, Typography} from 'antd';
 
-import PostForm from "./PostForm";
+import PostForm from './PostForm';
 
-const { Title } = Typography;
+const {Title} = Typography;
 
-function PostFormModal(props) {
-  const { visible, onCancel } = props;
+function PostFormModal (props) {
+  const {visible, onCancel, isEdit} = props;
+  const title = isEdit ? 'Edit Post' : 'New Post';
   return (
     <Modal
       visible={visible}
@@ -15,7 +16,7 @@ function PostFormModal(props) {
       destroyOnClose={true}
       title={
         <center>
-          <Title level={3}>New Post</Title>
+          <Title level={3}>{title}</Title>
         </center>
       }
     >

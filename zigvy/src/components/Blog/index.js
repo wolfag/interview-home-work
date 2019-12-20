@@ -14,6 +14,8 @@ const { Header, Footer, Content } = Layout;
 function Blog(props) {
   const {userId} = props;
   const [visiblePostModal, setVisiblePostModal] = useState(false);
+  const [initialPostData, setInitialPostData] = useState(null);
+  const [isEditPost, setIsEditPost] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch ();
 
@@ -25,14 +27,27 @@ function Blog(props) {
     setVisiblePostModal(true);
   };
 
-  const _onCancelNewPost = () => {
+  const _onEditPost = async(post)=>{
+    setIsEditPost(true);
+    setInitialPostData(post);
+    setVisiblePostModal(true);
+  }
+
+  const _onResetPostModal=()=>{
+    setIsEditPost(false);
+    setInitialPostData(null);
     setVisiblePostModal(false);
-  };
+  }
 
   const _onSubmitNewPost = async values => {
     dispatch(PostAction.addPostAction({data:{...values, owner: userId}}))
     setVisiblePostModal(false);
   };
+
+  const _onSubmitEditPost = async values=>{
+    dispatch(PostAction.updatePostAction({data:{...values}}));
+    _onResetPostModal();
+  }
 
   const _onSearchPost = values => {
     alert(values);
@@ -65,14 +80,16 @@ function Blog(props) {
           />
         </Header>
         <Content>
-          <PostList authorId={userId} />
+          <PostList authorId={userId} onEditPost={_onEditPost} />
         </Content>
         <Footer>This is footer</Footer>
       </Layout>
       <PostFormModal
         visible={visiblePostModal}
-        onCancel={_onCancelNewPost}
-        onSubmit={_onSubmitNewPost}
+        onCancel={_onResetPostModal}
+        onSubmit={isEditPost ? _onSubmitEditPost : _onSubmitNewPost}
+        initialValues={initialPostData}
+        isEdit={isEditPost}
       />
     </>
   );
