@@ -14,6 +14,12 @@ function CommentList(props) {
         <List
           dataSource={comments}
           split={false}
+          pagination={{
+            onChange: page => {
+              console.log(page);
+            },
+            pageSize: 5
+          }}
           renderItem={comment => {
             return (
               <List.Item key={comment.id}>

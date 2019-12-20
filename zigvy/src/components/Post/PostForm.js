@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
 import PropTypes from "prop-types";
+import { Button, Divider } from "antd";
 
 import PostModel from "./model";
 import { EditableTagGroup, Input, TextArea } from "components/ReduxField";
@@ -56,16 +57,24 @@ function PostForm(props) {
               rows={4}
             />
           </div>
-          <button type="submit" disabled={submitting}>
-            Submit
-          </button>
-          <button
-            type="button"
-            onClick={form.reset}
-            disabled={submitting || pristine}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginTop: 10
+            }}
           >
-            Reset
-          </button>
+            <Button type="primary" htmlType="submit" disabled={submitting}>
+              Submit
+            </Button>
+            <Button
+              type="button"
+              onClick={form.reset}
+              disabled={submitting || pristine}
+            >
+              Reset
+            </Button>
+          </div>
         </form>
       )}
     ></Form>

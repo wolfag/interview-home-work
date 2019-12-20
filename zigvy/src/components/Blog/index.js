@@ -60,7 +60,7 @@ function Blog() {
         <Content>
           <PostList />
         </Content>
-        <Footer>footer</Footer>
+        <Footer>This is footer</Footer>
       </Layout>
       <PostFormModal
         visible={visiblePostModal}

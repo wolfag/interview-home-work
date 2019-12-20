@@ -9,6 +9,12 @@ function PostList(props) {
   return (
     <List
       dataSource={posts}
+      pagination={{
+        onChange: page => {
+          console.log(page);
+        },
+        pageSize: 10
+      }}
       renderItem={post => {
         return (
           <List.Item key={post.id}>
