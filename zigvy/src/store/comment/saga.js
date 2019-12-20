@@ -15,9 +15,12 @@ function* addComment () {
       );
 
       yield put (CommentAction.addCommentSuccessAction (response));
-      notification.success ({
-        message: 'Add comment successfully',
-      });
+      yield put (
+        CommentAction.fakeAddCommentAction ({
+          ...action.payload.data,
+          id: Math.random (),
+        })
+      );
     } catch (error) {
       yield put (CommentAction.addCommentFailAction (error));
       notification.error ({
@@ -38,9 +41,7 @@ function* updateComment () {
       );
 
       yield put (CommentAction.updateCommentSuccessAction (response));
-      notification.success ({
-        message: 'Update comment successfully',
-      });
+      yield put (CommentAction.fakeUpdateCommentAction (action.payload.data));
     } catch (error) {
       yield put (CommentAction.updateCommentFailAction (error));
       notification.error ({
@@ -61,9 +62,7 @@ function* deleteComment () {
       );
 
       yield put (CommentAction.deleteCommentSuccessAction (response));
-      notification.success ({
-        message: 'Delete comment successfully',
-      });
+      yield put (CommentAction.fakeDeleteCommentAction (action.payload.data));
     } catch (error) {
       yield put (CommentAction.deleteCommentFailAction (error));
       notification.error ({

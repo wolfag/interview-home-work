@@ -4,13 +4,14 @@ import {List, Collapse} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 
 import Comment from './Comment';
+import ReplyEditor from 'components/ReplyEditor';
 import * as CommentAction from 'store/comment/action';
 import * as CommentSelector from 'store/comment/selector';
 
 const {Panel} = Collapse;
 
 function CommentList (props) {
-  const {postId} = props;
+  const {postId, ownerId} = props;
   const dispatch = useDispatch ();
 
   const comments = useSelector (CommentSelector.getListComment (postId));
@@ -26,6 +27,7 @@ function CommentList (props) {
     <Collapse bordered={false}>
       <Panel header={`${comments.length} replies`} showArrow={false}>
         <List
+          header={<ReplyEditor postId={postId} ownerId={ownerId} />}
           dataSource={comments}
           split={false}
           pagination={{
@@ -49,10 +51,12 @@ function CommentList (props) {
 
 CommentList.propTypes = {
   postId: PropTypes.number.isRequired,
+  ownerId: PropTypes.number.isRequired,
 };
 
 CommentList.defaultProps = {
   postId: 1,
+  ownerId: 1,
 
   //test
   comments: [

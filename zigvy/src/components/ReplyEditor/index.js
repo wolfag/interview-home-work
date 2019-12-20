@@ -1,45 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Form, Button, Input} from 'antd';
+import {useDispatch} from 'react-redux';
 
-const {TextArea} = Input;
+import * as CommentAction from 'store/comment/action';
+import CommentForm from './CommentForm';
 
-function Editor (props) {
-  const {onChange, onSubmit, submitting, value} = props;
-  return (
-    <div>
-      <Form.Item>
-        <TextArea rows={4} onChange={onChange} value={value} />
-      </Form.Item>
-      <Form.Item>
-        <Button
-          htmlType="submit"
-          loading={submitting}
-          onClick={onSubmit}
-          type="primary"
-        >
-          Add Comment
-        </Button>
-      </Form.Item>
-    </div>
-  );
+function ReplyPost (props) {
+  const {postId, ownerId} = props;
+  const dispatch = useDispatch ();
+
+  const _onSubmitComment = async values => {
+    dispatch (
+      CommentAction.addCommentAction ({
+        data: {...values, post: postId, owner: ownerId},
+      })
+    );
+  };
+
+  return <CommentForm onSubmit={_onSubmitComment} />;
 }
 
-Editor.propTypes = {
-  onChange: PropTypes.func,
-  onSubmit: PropTypes.func,
-  submitting: PropTypes.bool,
-  value: PropTypes.string,
+ReplyPost.propTypes = {
+  postId: PropTypes.number.isRequired,
+  ownerId: PropTypes.number.isRequired,
 };
-Editor.defaultProps = {
-  onSubmit: () => {
-    alert ('onSubmit');
-  },
-  onChange: () => {
-    alert ('onChange');
-  },
-  submitting: false,
-  value: '',
+ReplyPost.defaultProps = {
+  postId: 1,
+  ownerId: 1,
 };
 
-export default Editor;
+export default ReplyPost;

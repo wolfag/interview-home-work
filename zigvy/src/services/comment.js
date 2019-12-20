@@ -22,20 +22,26 @@ export default {
     return data;
   },
   createComment: async options => {
-    const result = await axios.post (`${baseUrl}/comments`, options.data);
-    return result.data;
+    // const result = await axios.post (`${baseUrl}/comments`, options.data);
+    // return result.data;
+
+    return true;
   },
   updateComment: async options => {
-    const result = await axios.put (
-      `${baseUrl}/comments/${options.commentId}`,
-      options.data
-    );
-    return result.data;
+    // const result = await axios.put (
+    //   `${baseUrl}/comments/${options.commentId}`,
+    //   options.data
+    // );
+    // return result.data;
+
+    return true;
   },
   deleteComment: async options => {
-    const result = await axios.delete (
-      `${baseUrl}/comments/${options.commentId}`
-    );
-    return result.data;
+    // const result = await axios.delete (
+    //   `${baseUrl}/comments/${options.commentId}`
+    // );
+    // return result.data;
+
+    return true;
   },
 };

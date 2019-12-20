@@ -95,13 +95,14 @@ function Post (props) {
 }
 
 Post.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   created_at: PropTypes.number.isRequired,
   tags: PropTypes.array,
   content: PropTypes.string.isRequired,
   onEditPost: PropTypes.func,
+  ownerId: PropTypes.number.isRequired,
 };
 Post.defaultProps = {
   id: 1,
@@ -118,6 +119,7 @@ Post.defaultProps = {
   onEditPost: () => {
     alert ('onEditPost');
   },
+  ownerId: 1,
 };
 
 export default Post;
