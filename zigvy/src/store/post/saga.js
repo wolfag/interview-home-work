@@ -89,8 +89,16 @@ function* getListPost () {
     const action = yield take (PostType.GET_LIST_POST);
     try {
       const response = yield call (postService.getListPost, action.payload);
+      // yield put (
+      //   PostAction.getListPostSuccessAction ({
+      //     origin: action.payload,
+      //     data: response,
+      //   })
+      // );
+
       yield put (
-        PostAction.getListPostSuccessAction ({
+        PostAction.fakeGetListPostAction ({
+          origin: action.payload,
           data: response,
         })
       );

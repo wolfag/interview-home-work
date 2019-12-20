@@ -1,39 +1,30 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { isEmpty } from "lodash";
-import { Avatar, Icon, Typography, Menu, Input } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {isEmpty} from 'lodash';
+import {Avatar, Icon, Typography, Menu, Input} from 'antd';
 
-const { SubMenu } = Menu;
-const { Title } = Typography;
-const { Search } = Input;
+const {SubMenu} = Menu;
+const {Title} = Typography;
+const {Search} = Input;
 
-function Header(props) {
-  const {
-    logo,
-    username,
-    menus,
-    searchValue,
-    onSearch,
-    onSearchChange
-  } = props;
+function Header (props) {
+  const {logo, username, menus, onSearch} = props;
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "space-between"
+        display: 'flex',
+        justifyContent: 'space-between',
       }}
     >
       <Avatar size={64} src={logo} alt="logo" />
-      <Title level={2} style={{ color: "white", alignSelf: "center" }}>
+      <Title level={2} style={{color: 'white', alignSelf: 'center'}}>
         Blogs
       </Title>
-      <div></div>
+      <div />
       <Search
         placeholder="Title, Tags..."
         onSearch={onSearch}
-        style={{ width: 200, height: "100%", alignSelf: "center" }}
-        value={searchValue}
-        onChange={onSearchChange}
+        style={{width: 200, height: '100%', alignSelf: 'center'}}
         allowClear
       />
       <Menu mode="horizontal">
@@ -43,7 +34,7 @@ function Header(props) {
               <Avatar size={64} icon="user" shape="square" />
               <span
                 style={{
-                  margin: 5
+                  margin: 5,
                 }}
               >
                 {username}
@@ -51,13 +42,13 @@ function Header(props) {
             </span>
           }
         >
-          {!isEmpty(menus) &&
-            menus.map((menu, index) => {
-              const { title, icon, action } = menu;
+          {!isEmpty (menus) &&
+            menus.map ((menu, index) => {
+              const {title, icon, action} = menu;
               return (
                 <Menu.Item key={index} onClick={action}>
                   <span>
-                    {icon && <Icon type={icon}></Icon>}
+                    {icon && <Icon type={icon} />}
                     <span>{title}</span>
                   </span>
                 </Menu.Item>
@@ -77,34 +68,30 @@ Header.propTypes = {
   onProfile: PropTypes.func,
   onNewPost: PropTypes.func,
   onSearch: PropTypes.func,
-  onSearchChange: PropTypes.func
 };
 Header.defaultProps = {
-  logo: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-  username: "Tai Nguyen",
-  searchValue: "",
+  logo: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+  username: 'Tai Nguyen',
+  searchValue: '',
   menus: [
     {
-      title: "title 1",
-      icon: "user",
+      title: 'title 1',
+      icon: 'user',
       action: () => {
-        alert("action1");
-      }
+        alert ('action1');
+      },
     },
     {
-      title: "title 2",
-      icon: "setting",
+      title: 'title 2',
+      icon: 'setting',
       action: () => {
-        alert("action2");
-      }
-    }
+        alert ('action2');
+      },
+    },
   ],
   onSearch: () => {
-    alert("onSearch");
+    alert ('onSearch');
   },
-  onSearchChange: () => {
-    alert("onSearchChange");
-  }
 };
 
 export default Header;

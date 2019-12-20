@@ -50,11 +50,7 @@ function Blog(props) {
   }
 
   const _onSearchPost = values => {
-    alert(values);
-  };
-
-  const _onSearchChange = event => {
-    setSearchValue(event.target.value);
+    setSearchValue(values)
   };
 
   return (
@@ -62,9 +58,7 @@ function Blog(props) {
       <Layout>
         <Header style={{ background: "grey" }}>
           <MyHeader
-            searchValue={searchValue}
             onSearch={_onSearchPost}
-            onSearchChange={_onSearchChange}
             menus={[
               {
                 title: "Profile",
@@ -80,7 +74,7 @@ function Blog(props) {
           />
         </Header>
         <Content>
-          <PostList onEditPost={_onEditPost} />
+          <PostList searchValues={searchValue} onEditPost={_onEditPost} />
         </Content>
         <Footer>This is footer</Footer>
       </Layout>

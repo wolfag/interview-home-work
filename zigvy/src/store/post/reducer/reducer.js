@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 import {handleActions} from 'redux-actions';
-import {at, get} from 'lodash';
+import {at, get, isEmpty} from 'lodash';
 
 import * as Type from '../type';
 import {initialState} from './initialize';
@@ -183,6 +183,53 @@ const reducer = handleActions (
           });
         } else {
           return state;
+        }
+      },
+    ],
+    [
+      Type.FAKE_GET_LIST_POST,
+      (state, action) => {
+        let [data, offset, limit, total] = at (
+          action,
+          'payload.data.data',
+          'payload.data.offset',
+          'payload.data.limit',
+          'payload.data.total'
+        );
+        const filterValue = get (action, 'payload.origin.filter.searchValues');
+        if (filterValue) {
+          const tmp = [];
+          const re = RegExp (filterValue, 'ig');
+          for (let i = 0; i < data.length; i++) {
+            if (re.test (data[i].title)) {
+              tmp.push (data[i]);
+            } else if (!isEmpty (data[i].tags)) {
+              for (let j = 0; j < data[i].tags.length; j++) {
+                if (re.test (data[i].tags[j])) {
+                  tmp.push (data[i]);
+                }
+              }
+            }
+          }
+          return update (state, {
+            listPost: {
+              loading: {$set: false},
+              list: {$set: tmp},
+              offset: {$set: offset},
+              limit: {$set: limit},
+              total: {$set: tmp.length},
+            },
+          });
+        } else {
+          return update (state, {
+            listPost: {
+              loading: {$set: false},
+              list: {$set: data},
+              offset: {$set: offset},
+              limit: {$set: limit},
+              total: {$set: total},
+            },
+          });
         }
       },
     ],

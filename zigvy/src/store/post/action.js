@@ -34,3 +34,4 @@ export const getListPostByAuthorFailAction = createAction (
 export const fakeAddPostAction = createAction (Type.FAKE_ADD_POST);
 export const fakeUpdatePostAction = createAction (Type.FAKE_UPDATE_POST);
 export const fakeDeletePostAction = createAction (Type.FAKE_DELETE_POST);
+export const fakeGetListPostAction = createAction (Type.FAKE_GET_LIST_POST);

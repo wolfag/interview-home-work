@@ -23,3 +23,4 @@ export const GET_LIST_POST_BY_AUTHOR_FAIL = 'post/GET_LIST_POST_BY_AUTHOR_FAIL';
 export const FAKE_ADD_POST = 'fake/ADD_POST';
 export const FAKE_UPDATE_POST = 'fake/UPDATE_POST';
 export const FAKE_DELETE_POST = 'fake/DELETE_POST';
+export const FAKE_GET_LIST_POST = 'fake/FAKE_GET_LIST_POST';
