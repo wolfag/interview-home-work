@@ -3,7 +3,7 @@ import { handleActions } from "redux-actions";
 import { at } from "lodash";
 
 import * as Type from "../type";
-import { initialState } from "../../comment/reducer/initialize";
+import { initialState } from "./initialize";
 
 const reducer = handleActions(
   new Map([

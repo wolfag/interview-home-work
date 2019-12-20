@@ -1,0 +1,15 @@
+import { createSelector } from "reselect";
+import { get, at } from "lodash";
+
+export const getListComment = createSelector(
+  state => state.comment.commentByPost,
+  list => list || {}
+);
+
+export const getAddCommentLoadingStatus = state => state.comment.add.loading;
+
+export const getDeleteCommentLoadingStatus = state =>
+  state.comment.delete.loading;
+
+export const getUpdateCommentLoadingStatus = state =>
+  state.comment.update.loading;
