@@ -6,9 +6,10 @@ import {connect} from 'react-redux';
 import Post from './Post';
 import * as PostAction from 'store/post/action';
 import * as PostSelector from 'store/post/selector';
+import Constant from 'common/constant';
 
 class PostList extends React.Component {
-  loadOptions = {paging: {offset: 0, limit: 10}, filter: {}};
+  loadOptions = {paging: {offset: 0, limit: Constant.postSize}, filter: {}};
 
   componentDidMount () {
     this._loadListPost ();

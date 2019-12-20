@@ -7,10 +7,11 @@ import update from 'immutability-helper';
 import Post from './Post';
 import * as PostAction from 'store/post/action';
 import * as PostSelector from 'store/post/selector';
+import Constant from 'common/constant';
 
 function PostList (props) {
   const [loadOptions, setLoadOptions] = useState ({
-    paging: {offset: 0, limit: 10},
+    paging: {offset: 0, limit: Constant.postSize},
     filter: {},
   });
 

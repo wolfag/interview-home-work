@@ -1,18 +1,20 @@
+import Constant from 'common/constant';
+
 export const initialState = {
   listPost: {
     loading: false,
     list: [],
     total: 0,
     offset: 0,
-    limit: 10
+    limit: Constant.postSize,
   },
   add: {
-    loading: false
+    loading: false,
   },
   update: {
-    loading: false
+    loading: false,
   },
   delete: {
-    loading: false
-  }
+    loading: false,
+  },
 };
