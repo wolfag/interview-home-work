@@ -1,56 +1,56 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Layout } from "antd";
-import {useDispatch, useSelector} from 'react-redux';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 import { PostList, PostFormModal } from "components/Post";
 import MyHeader from "components/Header";
+import { history } from "store";
 
-import * as PostAction from 'store/post/action';
-
+import * as PostAction from "store/post/action";
 
 const { Header, Footer, Content } = Layout;
 
 function Blog(props) {
-  const {userId} = props;
+  const { userId } = props;
   const [visiblePostModal, setVisiblePostModal] = useState(false);
   const [initialPostData, setInitialPostData] = useState(null);
   const [isEditPost, setIsEditPost] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const dispatch = useDispatch ();
+  const dispatch = useDispatch();
 
   const _onProfile = () => {
-    alert("onProfile");
+    history.push("/profile");
   };
 
   const _onNewPost = () => {
     setVisiblePostModal(true);
   };
 
-  const _onEditPost = async(post)=>{
+  const _onEditPost = async post => {
     setIsEditPost(true);
     setInitialPostData(post);
     setVisiblePostModal(true);
-  }
+  };
 
-  const _onResetPostModal=()=>{
+  const _onResetPostModal = () => {
     setIsEditPost(false);
     setInitialPostData(null);
     setVisiblePostModal(false);
-  }
+  };
 
   const _onSubmitNewPost = async values => {
-    dispatch(PostAction.addPostAction({data:{...values, owner: userId}}))
+    dispatch(PostAction.addPostAction({ data: { ...values, owner: userId } }));
     setVisiblePostModal(false);
   };
 
-  const _onSubmitEditPost = async values=>{
-    dispatch(PostAction.updatePostAction({data:{...values}}));
+  const _onSubmitEditPost = async values => {
+    dispatch(PostAction.updatePostAction({ data: { ...values } }));
     _onResetPostModal();
-  }
+  };
 
   const _onSearchPost = values => {
-    setSearchValue(values)
+    setSearchValue(values);
   };
 
   return (
@@ -89,12 +89,12 @@ function Blog(props) {
   );
 }
 
-Blog.propTypes={
+Blog.propTypes = {
   userId: PropTypes.number.isRequired
-}
+};
 
-Blog.defaultProps={
+Blog.defaultProps = {
   userId: 3
-}
+};
 
 export default Blog;
