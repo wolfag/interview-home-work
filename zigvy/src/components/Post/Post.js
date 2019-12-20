@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import moment from "moment";
-import { Typography, Tag, Card, Icon, Modal } from "antd";
-import { isEmpty } from "lodash";
+import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+import moment from 'moment';
+import {Typography, Tag, Card, Icon, Modal} from 'antd';
+import {isEmpty} from 'lodash';
 
-import Constant from "common/constant";
-import { CommentList } from "components/Comment";
+import Constant from 'common/constant';
+import {CommentList} from 'components/Comment';
 
-const { Title, Paragraph } = Typography;
-const { confirm } = Modal;
+const {Title, Paragraph} = Typography;
+const {confirm} = Modal;
 
-function Post(props) {
+function Post (props) {
   const {
     id,
     title,
@@ -19,35 +19,35 @@ function Post(props) {
     tags,
     content,
     onDeletePost,
-    onEditPost
+    onEditPost,
   } = props;
 
   const _showDeleteConfirm = () => {
-    confirm({
-      title: "Are you sure delete this post?",
-      okText: "Yes",
-      okType: "danger",
-      cancelText: "No",
-      onOk() {
-        onDeletePost(id);
+    confirm ({
+      title: 'Are you sure delete this post?',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk () {
+        onDeletePost (id);
       },
-      onCancel() {
-        console.log("Cancel");
-      }
+      onCancel () {
+        console.log ('Cancel');
+      },
     });
   };
 
   return (
     <Card
       style={{
-        width: "100%"
+        width: '100%',
       }}
       extra={
         <span
           style={{
             width: 50,
-            display: "flex",
-            justifyContent: "space-between"
+            display: 'flex',
+            justifyContent: 'space-between',
           }}
         >
           <Icon type="edit" onClick={onEditPost} />
@@ -57,9 +57,9 @@ function Post(props) {
       title={
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: 20
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: 20,
           }}
         >
           <Title level={2}>{title}</Title>
@@ -68,30 +68,29 @@ function Post(props) {
     >
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: 10
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginBottom: 10,
         }}
       >
         <div>
           <div>{`Author: ${author}`}</div>
-          <div>{`Created at: ${moment(createdAt).format(
-            Constant.dateFormat
-          )}`}</div>
+          <div
+          >{`Created at: ${moment (createdAt).format (Constant.dateFormat)}`}</div>
         </div>
         <div>
-          {!isEmpty(tags) &&
-            tags.map(tag => {
+          {!isEmpty (tags) &&
+            tags.map (tag => {
               return <Tag key={tag}>{tag}</Tag>;
             })}
         </div>
       </div>
       <div>
-        <Paragraph ellipsis={{ rows: 4, expandable: true }}>
+        <Paragraph ellipsis={{rows: 4, expandable: true}}>
           {content}
         </Paragraph>
       </div>
-      <CommentList />
+      <CommentList postId={id} />
     </Card>
   );
 }
@@ -104,14 +103,14 @@ Post.propTypes = {
   tags: PropTypes.array,
   content: PropTypes.string.isRequired,
   onDeletePost: PropTypes.func,
-  onEditPost: PropTypes.func
+  onEditPost: PropTypes.func,
 };
 Post.defaultProps = {
   id: 1,
-  title: "Post 1",
-  author: "Author 1",
+  title: 'Post 1',
+  author: 'Author 1',
   createdAt: 1576506719083,
-  tags: ["red", "blue"],
+  tags: ['red', 'blue'],
   content: `Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
   Design, a design language for background applications, is refined by Ant UED Team. Ant Design,
   a design language for background applications, is refined by Ant UED Team. Ant Design, a
@@ -119,11 +118,11 @@ Post.defaultProps = {
   language for background applications, is refined by Ant UED Team. Ant Design, a design
   language for background applications, is refined by Ant UED Team.`,
   onDeletePost: () => {
-    alert("onDeletePost");
+    alert ('onDeletePost');
   },
   onEditPost: () => {
-    alert("onEditPost");
-  }
+    alert ('onEditPost');
+  },
 };
 
 export default Post;

@@ -1,49 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { List } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 import Post from "./Post";
 import * as PostAction from "store/post/actions";
 import * as PostSelector from "store/post/selector";
 
-function PostList(props) {
+class PostList extends React.Component {
   loadOptions = { paging: { offset: 0, limit: 10 }, filter: {} };
 
-  const dispatch = useDispatch();
-  const { searchValues, authorId } = props;
+  componentDidMount() {
+    this._loadListPost();
+  }
 
-  useEffect(() => {
-    dispatch(PostAction.getListPostByAuthorAction({ ...loadOptions }));
-  }, [loadOptions]);
-
-  const paging = useSelector(state => PostSelector.getPostPaging(state));
-  const posts = useSelector(state => PostSelector.getListPost(state));
-  const loading = useSelector(state =>
-    PostSelector.getListPostLoadingStatus(state)
-  );
-
-  const _onPaging = (page, pageSite) => {
-    loadOptions.paging.offset = (page - 1) * pageSite;
+  _onPaging = (page, pageSite) => {
+    this.loadOptions.paging.offset = (page - 1) * pageSite;
+    this._loadListPost();
   };
 
-  return (
-    <List
-      loading={loading}
-      dataSource={posts}
-      pagination={{
-        ...paging,
-        onChange: _onPaging
-      }}
-      renderItem={post => {
-        return (
-          <List.Item key={post.id}>
-            <Post {...post} />
-          </List.Item>
-        );
-      }}
-    />
-  );
+  _loadListPost = () => {
+    const { getListPost, authorId } = this.props;
+    getListPost({ authorId, ...this.loadOptions });
+  };
+
+  render() {
+    const { searchValues, posts, loading, paging } = this.props;
+    return (
+      <List
+        loading={loading}
+        dataSource={posts}
+        pagination={{
+          ...paging,
+          onChange: this._onPaging
+        }}
+        renderItem={post => {
+          return (
+            <List.Item key={post.id}>
+              <Post {...post} />
+            </List.Item>
+          );
+        }}
+      />
+    );
+  }
 }
 
 PostList.propTypes = {
@@ -96,4 +96,17 @@ PostList.defaultProps = {
   ]
 };
 
-export default PostList;
+const mapStateToProps = state => ({
+  // posts: PostSelector.getListPost(state),
+  paging: PostSelector.getPostPaging(state),
+  loading: PostSelector.getListPostLoadingStatus(state)
+});
+
+const mapDispatchToProps = {
+  getListPost: PostAction.getListPostByAuthorAction
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostList);
