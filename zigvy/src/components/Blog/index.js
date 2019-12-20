@@ -80,7 +80,7 @@ function Blog(props) {
           />
         </Header>
         <Content>
-          <PostList authorId={userId} onEditPost={_onEditPost} />
+          <PostList onEditPost={_onEditPost} />
         </Content>
         <Footer>This is footer</Footer>
       </Layout>
@@ -100,7 +100,7 @@ Blog.propTypes={
 }
 
 Blog.defaultProps={
-  userId: 1
+  userId: 3
 }
 
 export default Blog;

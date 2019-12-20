@@ -15,7 +15,7 @@ function PostList (props) {
   });
 
   const dispatch = useDispatch ();
-  const {searchValues, authorId, onEditPost} = props;
+  const {searchValues, onEditPost} = props;
 
   useEffect (
     () => {
@@ -30,11 +30,9 @@ function PostList (props) {
 
   useEffect (
     () => {
-      dispatch (
-        PostAction.getListPostByAuthorAction ({authorId, ...loadOptions})
-      );
+      dispatch (PostAction.getListPostAction ({...loadOptions}));
     },
-    [authorId, loadOptions]
+    [loadOptions]
   );
 
   const paging = useSelector (state => PostSelector.getPostPaging (state));
@@ -72,12 +70,8 @@ function PostList (props) {
   );
 }
 
-PostList.propTypes = {
-  authorId: PropTypes.number.isRequired,
-};
+PostList.propTypes = {};
 PostList.defaultProps = {
-  authorId: 2,
-
   //test
   posts: [
     {

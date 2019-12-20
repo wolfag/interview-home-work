@@ -13,7 +13,7 @@ const {Title, Paragraph} = Typography;
 const {confirm} = Modal;
 
 function Post (props) {
-  const {id, title, author, createdAt, tags, content, onEditPost} = props;
+  const {id, title, owner, created_at, tags, content, onEditPost} = props;
 
   const dispatch = useDispatch ();
 
@@ -73,9 +73,9 @@ function Post (props) {
         }}
       >
         <div>
-          <div>{`Author: ${author}`}</div>
+          <div>{`Author: ${owner}`}</div>
           <div
-          >{`Created at: ${moment (createdAt).format (Constant.dateFormat)}`}</div>
+          >{`Created at: ${moment (created_at).format (Constant.dateFormat)}`}</div>
         </div>
         <div>
           {!isEmpty (tags) &&
@@ -98,7 +98,7 @@ Post.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
-  createdAt: PropTypes.number.isRequired,
+  created_at: PropTypes.number.isRequired,
   tags: PropTypes.array,
   content: PropTypes.string.isRequired,
   onEditPost: PropTypes.func,
@@ -107,7 +107,7 @@ Post.defaultProps = {
   id: 1,
   title: 'Post 1',
   author: 'Author 1',
-  createdAt: 1576506719083,
+  created_at: 1576506719083,
   tags: ['red', 'blue'],
   content: `Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
   Design, a design language for background applications, is refined by Ant UED Team. Ant Design,

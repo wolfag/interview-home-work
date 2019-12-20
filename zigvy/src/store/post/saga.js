@@ -84,6 +84,25 @@ function* getListPostByAuthor () {
     }
   }
 }
+function* getListPost () {
+  while (1) {
+    const action = yield take (PostType.GET_LIST_POST);
+    try {
+      const response = yield call (postService.getListPost, action.payload);
+      yield put (
+        PostAction.getListPostSuccessAction ({
+          data: response,
+        })
+      );
+    } catch (error) {
+      yield put (PostAction.getListPostFailAction (error));
+      notification.error ({
+        message: 'Can not get list post for now',
+        description: error.message,
+      });
+    }
+  }
+}
 
 export default function* rootSaga () {
   yield all ([
@@ -91,5 +110,6 @@ export default function* rootSaga () {
     updatePost (),
     deletePost (),
     getListPostByAuthor (),
+    getListPost (),
   ]);
 }

@@ -10,6 +10,10 @@ export const DELETE_POST = 'post/DELETE_POST';
 export const DELETE_POST_SUCCESS = 'post/DELETE_POST_SUCCESS';
 export const DELETE_POST_FAIL = 'post/DELETE_POST_FAIL';
 
+export const GET_LIST_POST = 'post/GET_LIST_POST';
+export const GET_LIST_POST_SUCCESS = 'post/GET_LIST_POST_SUCCESS';
+export const GET_LIST_POST_FAIL = 'post/GET_LIST_POST_FAIL';
+
 export const GET_LIST_POST_BY_AUTHOR = 'post/GET_LIST_POST_BY_AUTHOR';
 export const GET_LIST_POST_BY_AUTHOR_SUCCESS =
   'post/GET_LIST_POST_BY_AUTHOR_SUCCESS';

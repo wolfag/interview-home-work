@@ -98,7 +98,7 @@ const reducer = handleActions (
       },
     ],
     [
-      Type.GET_LIST_POST_BY_AUTHOR,
+      Type.GET_LIST_POST,
       state => {
         return update (state, {
           listPost: {
@@ -118,7 +118,7 @@ const reducer = handleActions (
       },
     ],
     [
-      Type.GET_LIST_POST_BY_AUTHOR_SUCCESS,
+      Type.GET_LIST_POST_SUCCESS,
       (state, action) => {
         const [data, offset, limit, total] = at (
           action,
@@ -143,7 +143,7 @@ const reducer = handleActions (
       (state, action) => {
         return update (state, {
           listPost: {
-            list: {$push: [action.payload]},
+            list: {$unshift: [action.payload]},
             total: {$set: state.listPost.total + 1},
           },
         });

@@ -17,7 +17,13 @@ export default {
     //   `${baseUrl}/posts${params ? `?${params}` : ''}`
     // );
     // return result.data;
-    return postData;
+
+    return {
+      data: postData,
+      total: postData.length,
+      limit: options.paging.limit,
+      offset: 0,
+    };
   },
   getListPostByAuthor: async options => {
     // const params = queryString.stringify (options.paging);

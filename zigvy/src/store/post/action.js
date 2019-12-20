@@ -14,6 +14,12 @@ export const deletePostAction = createAction (Type.DELETE_POST);
 export const deletePostSuccessAction = createAction (Type.DELETE_POST_SUCCESS);
 export const deletePostFailAction = createAction (Type.DELETE_POST_FAIL);
 
+export const getListPostAction = createAction (Type.GET_LIST_POST);
+export const getListPostSuccessAction = createAction (
+  Type.GET_LIST_POST_SUCCESS
+);
+export const getListPostFailAction = createAction (Type.GET_LIST_POST_FAIL);
+
 export const getListPostByAuthorAction = createAction (
   Type.GET_LIST_POST_BY_AUTHOR
 );
