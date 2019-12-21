@@ -30,7 +30,7 @@ const reducer = handleActions(
       Type.LOGIN_SUCCESS,
       (state, action) => {
         // const token = get(action.payload, "token"); //for real server
-        const token = moment();
+        const token = moment().unix();
         setToken(token);
         setAuth(action.payload);
         return update(state, {
