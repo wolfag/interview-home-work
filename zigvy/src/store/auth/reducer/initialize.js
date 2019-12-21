@@ -1,4 +1,5 @@
 export const initialState = {
   loading: false,
-  authInfo: null
+  authInfo: null,
+  token: null
 };
