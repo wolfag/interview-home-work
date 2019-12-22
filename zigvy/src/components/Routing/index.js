@@ -1,16 +1,13 @@
 import React from "react";
-import { Route, Switch } from "react-router";
-import { useSelector } from "react-redux";
+import { Switch } from "react-router";
 
 import Login from "components/Auth";
 import Blogs from "components/Blog";
 import Profile from "components/Profile";
-import * as AuthSelector from "store/auth/selector";
 import PrivateRoute from "./PrivateRoute";
+import AuthRoute from "./AuthRoute";
 
-import { history } from "store";
-
-const routes = [
+const authRoutes = [
   {
     path: "/",
     component: Login
@@ -33,8 +30,6 @@ const privateRoutes = [
 ];
 
 function Router(props) {
-  const isAuthenticated = useSelector(AuthSelector.getAuthToken);
-  // console.log("----", history);
   return (
     <Switch>
       {privateRoutes.map(route => (
@@ -44,14 +39,13 @@ function Router(props) {
           component={route.component}
         />
       ))}
-      {!isAuthenticated &&
-        routes.map(route => (
-          <Route
-            key={route.path}
-            path={route.path}
-            component={route.component}
-          />
-        ))}
+      {authRoutes.map(route => (
+        <AuthRoute
+          key={route.path}
+          path={route.path}
+          component={route.component}
+        />
+      ))}
     </Switch>
   );
 }

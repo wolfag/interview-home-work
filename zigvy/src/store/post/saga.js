@@ -17,7 +17,7 @@ function* addPost() {
         PostAction.fakeAddPostAction({
           ...action.payload.data,
           id: Math.random(),
-          created_at: moment()
+          created_at: moment().unix()
         })
       );
     } catch (error) {
